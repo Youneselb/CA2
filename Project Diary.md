@@ -4,13 +4,15 @@ Class E
 
 Group 10 
 
-Members: Henrik Lønquist Thomasen, Mark Sørensen og Yones El Bana.
+Members: 
+
+Henrik Lønquist Thomasen 
+Mark Sørensen
+Yones El Bana.
 
 Phase one (Monday 19/10-Tuesday 20/10): 
 
 Who was active during this sprint? Everybody.
-
-
 
 Who did what, during this sprint?
 
