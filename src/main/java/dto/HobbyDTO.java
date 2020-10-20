@@ -7,22 +7,54 @@ import java.util.List;
 public class HobbyDTO {
     private long id;
     private String name;
-    private String description;
+    private String wikiLink;
+    private String category;
+    private String type;
     
     public HobbyDTO() {
     }
 
-    public HobbyDTO(Integer id, String name, String description) {
-        this.id = id;
+    public HobbyDTO(String name, String wikiLink, String category, String type) {
         this.name = name;
-        this.description = description;
+        this.wikiLink = wikiLink;
+        this.category = category;
+        this.type = type;
     }
+
 
     public HobbyDTO(Hobby hobby)  {
         this.id = hobby.getId();
         this.name = hobby.getName();
-        this.description = hobby.getDescription();
+        this.wikiLink = hobby.getWikiLink();
+        this.category = hobby.getCategory();
+        this.type = hobby.getType();
     }
+
+    public String getWikiLink() {
+        return wikiLink;
+    }
+
+    public void setWikiLink(String wikiLink) {
+        this.wikiLink = wikiLink;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+    
+    
 
     public long getId() {
         return id;
@@ -40,13 +72,6 @@ public class HobbyDTO {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
     
     
       

@@ -1,10 +1,13 @@
 package entities;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 
 
@@ -16,16 +19,49 @@ public class Hobby implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(length = 50)
     private String name;
-    private String description;
+    private String wikiLink;
+    private String category;
+    private String type;
+    @ManyToMany(mappedBy = "hobby")
+    private Person person;
+    
     
     public Hobby() {
     }
 
-    public Hobby(String name, String description) {
+    public Hobby(String name, String wikiLink, String category, String type) {
         this.name = name;
-        this.description = description;
+        this.wikiLink = wikiLink;
+        this.category = category;
+        this.type = type;
     }
+
+    public String getWikiLink() {
+        return wikiLink;
+    }
+
+    public void setWikiLink(String wikiLink) {
+        this.wikiLink = wikiLink;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
 
   
     public Long getId() {
@@ -44,29 +80,7 @@ public class Hobby implements Serializable {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-    
-@Override
-    public boolean equals(Object obj) {
-        if(obj == null) return false;
-        if(obj.getClass() != this.getClass()) return false;
-        else {
-            Hobby other = (Hobby)obj;
-            if(this.id == null || other.getId() == null) return false;
-            return other.getId().equals(this.id);
-        }
-    }
-
-    @Override
-    public int hashCode() {
-        return super.hashCode();
-    }
+   
     
    
 }
