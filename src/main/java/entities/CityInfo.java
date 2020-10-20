@@ -29,21 +29,8 @@ public class CityInfo implements Serializable {
         return zipCode;
     }
 
-    public void setZipCode(String zipCode) {
-        this.zipCode = zipCode;
-    }
-
     public String getCity() {
         return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    @Override
-    public String toString() {
-        return "CityInfo{" + "zipCode=" + zipCode + ", city=" + city + '}';
     }
 
 }
