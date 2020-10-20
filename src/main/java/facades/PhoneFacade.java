@@ -3,15 +3,15 @@ package facades;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
-public class AddressFacade {
-
-    private static AddressFacade instance;
+public class PhoneFacade {
+    
+    private static PhoneFacade instance;
     private static EntityManagerFactory emf;
 
-    public static AddressFacade getAddressFacade(EntityManagerFactory _emf) {
+    public static PhoneFacade getPhoneFacade(EntityManagerFactory _emf) {
         if (instance == null) {
             emf = _emf;
-            instance = new AddressFacade();
+            instance = new PhoneFacade();
         }
         return instance;
     }
