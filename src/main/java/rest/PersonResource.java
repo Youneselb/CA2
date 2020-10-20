@@ -11,8 +11,8 @@
 //import javax.ws.rs.core.MediaType;
 //
 ////Todo Remove or change relevant parts before ACTUAL use
-//@Path("xxx")
-//public class RenameMeResource {
+//@Path("person")
+//public class PersonResource {
 //
 //    private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
 //       
@@ -22,14 +22,16 @@
 //    @GET
 //    @Produces({MediaType.APPLICATION_JSON})
 //    public String demo() {
-//        return "{\"msg\":\"Hello World\"}";
+//        return "{\"msg\":\"Get test\"}";
 //    }
-//    @Path("count")
+//
+//    @Path("{street}")
 //    @GET
 //    @Produces({MediaType.APPLICATION_JSON})
-//    public String getRenameMeCount() {
-//        long count = FACADE.getRenameMeCount();
-//        //System.out.println("--------------->"+count);
-//        return "{\"count\":"+count+"}";  //Done manually so no need for a DTO
+//    public String getAddress(@PathParam("street") String street) throws AddressNotFound {
+//        AddressDTO a = FACADE.getAddress((String) street);
+//        return GSON.toJson(a);
 //    }
+//    
+//
 //}
