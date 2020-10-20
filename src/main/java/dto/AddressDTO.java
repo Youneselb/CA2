@@ -3,6 +3,7 @@ package dto;
 import entities.Address;
 
 public class AddressDTO {
+
     private String street;
     private String additionalInfo;
 
@@ -18,7 +19,7 @@ public class AddressDTO {
         this.street = address.getStreet();
         this.additionalInfo = address.getAdditionalInfo();
     }
-    
+
     public String getStreet() {
         return street;
     }
@@ -34,6 +35,5 @@ public class AddressDTO {
     public void setAdditionalInfo(String additionalInfo) {
         this.additionalInfo = additionalInfo;
     }
-    
-    
+
 }
