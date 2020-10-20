@@ -1,14 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package facades;
 
-/**
- *
- * @author Marks
- */
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+
 public class PersonFacade {
-    
+
+    private static PersonFacade instance;
+    private static EntityManagerFactory emf;
+
+    public static PersonFacade getPersonFacade(EntityManagerFactory _emf) {
+        if (instance == null) {
+            emf = _emf;
+            instance = new PersonFacade();
+        }
+        return instance;
+    }
+
+    private EntityManager getEntityManager() {
+        return emf.createEntityManager();
+    }
+
 }
