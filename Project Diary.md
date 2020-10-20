@@ -12,12 +12,18 @@ Yones El Bana.
 
 Phase one (Monday 19/10-Tuesday 20/10): 
 
-Who was active during this sprint? Everybody.
+Who was active during this sprint? 
+Everybody was active.
 
 Who did what, during this sprint?
+Yones: Lavade opsætning af Travis, projektet via Git Hub og database, cors package, samt klasserne request/reponse filter. HobbyDTO, Hobby og HobbyFacade.
+Mark: Lavade klasserne HobbyDTO, PersonDTO, Person, Hobby, HobbyFacade, PersonFacade. 
+Henrik: Lavade exceptions package, samt klasserne AddressDTO, CityInfoDTO, ExceptionDTO, PhoneDTO, Address, CityInfo, Phone, AddressNotFound, AddressNotFoundMapper,
+AddressFacade, CityInfoFacade, PhoneFacade og PersonResource.
 
-What did your team accomplish during this spring?
-
+What did your team accomplish during this sprint?
+We have somewhat finished the foundation of the projekt. We have a worked CI-pipeline. we are somewhat ready for testing of Addresses. 
+Our database has been updated with sql scripts. Our API documentation for this sprint is done. All links as requested has been added to the google docs.
 
 Phase two (Wednesday 21/10-Thursday 22/10):
 
