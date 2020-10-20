@@ -20,9 +20,55 @@ public class Person implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String email;
+    private String lName;
+    private String fName;
+    //skal have annotation her.
+    private String phonenumber;
+    //skal have annotation her.
+    private String hobby;
+    //skal have annotation her.
+    private String address;
+    //skal have annotation her.
+    private String city;
+    
 
+    public Person() {
+    }
+
+    public Person(String email, String fName, String lName) {
+        this.email = email;
+        this.lName = fName;
+        this.fName = lName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getlName() {
+        return lName;
+    }
+
+    public void setlName(String lName) {
+        this.lName = lName;
+    }
+
+    public String getfName() {
+        return fName;
+    }
+
+    public void setfName(String fName) {
+        this.fName = fName;
+    }
+    
+    
     public Long getId() {
         return id;
     }
@@ -31,29 +77,6 @@ public class Person implements Serializable {
         this.id = id;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Person)) {
-            return false;
-        }
-        Person other = (Person) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "entities.Person[ id=" + id + " ]";
-    }
+    
     
 }
