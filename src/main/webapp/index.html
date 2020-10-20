@@ -5,6 +5,100 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
-        <h1>Change or remove this page</h1>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Method</th>
+                    <th scope="col">URL</th>
+                    <th scope="col">Request Body (JSON)</th>
+                    <th scope="col">Response (JSON)</th>
+                    <th scope="col">Error (e)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>GET</td>
+                    <td>/api/person/{phone}</td>
+                    <td>{} all info about that person</td>
+                    <td>user(?)</td>
+                    <td>(e)</td>
+                </tr>
+                <tr>
+                    <td>GET</td>
+                    <td>/api/person/all/{zipcode}</td>
+                    <td>{}</td>
+                    <td>[user1, user2, ...] all with that zipcode</td>
+                    <td>(e)</td>
+                </tr>
+                <tr>
+                    <td>GET</td>
+                    <td>/api/person/all/{hobby}</td>
+                    <td>{}</td>
+                    <td>[user1, user2, ...] all with that hobby</td>
+                    <td>(e)</td>
+                </tr>
+                <tr>
+                    <td>GET</td>
+                    <td>/api/person/hobby/{count}</td>
+                    <td>{}</td>
+                    <td>[user1, user2, ...] the amount of people with that hobby</td>
+                    <td>(e)</td>
+                </tr>
+                <tr>
+                    <td>GET</td>
+                    <td>/api/person/ziplist</td>
+                    <td>{}</td>
+                    <td>[zip1, zip2, ...] list of all zips</td>
+                    <td>(e)</td>
+                </tr>
+                <tr>
+                    <td>POST</td>
+                    <td>/api/person</td>
+                    <td>{creates person with given info}</td>
+                    <td>person with all info</td>
+                    <td>(e)</td>
+                </tr>
+                <tr>
+                    <td>PUT</td>
+                    <td>/api/person{id}</td>
+                    <td>person</td>
+                    <td>edited person </td>
+                    <td>(e)</td>
+                </tr>
+            </tbody>
+        </table>
+        <div>
+            <h1>Request Body and Response Formats</h1>
+            <p>
+                User format
+                {
+                "id": Number,
+                "name": String,
+                "phone": Phone,
+                "address": Address,
+                "hobby": Hobby
+                }
+            </p>
+            <p>
+                Hobby format
+                {
+                "id": Number,
+                "name": String,
+                "wikiLink": String,
+                "type": String
+                }            
+            </p>
+            <p>
+                zip format
+                {
+                "zip": String,
+                "city": String
+                }
+            </p>
+            <h1>Errors</h1>
+            { status : statusCode, "msg": "Explains the problem" }
+            (e1) :{ status : 404, "msg": "No content found for this request" }
+            (e2) :{ status : 400, "msg": "Field ‘xxx’ is required" } (for example, no name provided)       
+        </div>
     </body>
 </html>

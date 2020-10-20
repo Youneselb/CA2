@@ -20,4 +20,4 @@ public class CityInfoFacade {
         return emf.createEntityManager();
     }
 
-}
+    }

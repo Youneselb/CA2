@@ -15,12 +15,12 @@ import javax.ws.rs.ext.Provider;
  * @author Henne
  */
 @Provider
-public class AddressNotFoundMapper implements ExceptionMapper<AddressNotFound> 
+public class PersonNotFoundExceptionMapper implements ExceptionMapper<PersonNotFoundException> 
 {
     static Gson gson = new GsonBuilder().setPrettyPrinting().create();   
     @Override
-    public Response toResponse(AddressNotFound ex) {
-       Logger.getLogger(AddressNotFoundMapper.class.getName())
+    public Response toResponse(PersonNotFoundException ex) {
+       Logger.getLogger(PersonNotFoundExceptionMapper.class.getName())
            .log(Level.SEVERE, null, ex);
        ExceptionDTO err = new ExceptionDTO(404,ex.getMessage());
        return Response
@@ -30,3 +30,4 @@ public class AddressNotFoundMapper implements ExceptionMapper<AddressNotFound>
                .build();
 	}
 }
+
