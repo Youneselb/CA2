@@ -18,8 +18,7 @@ Everybody was active.
 Who did what, during this sprint?
 Yones: Worked on Travis, getting the project running via Git Hub and database functionality, cors package, the following classes request/reponse filter. HobbyDTO, Hobby and HobbyFacade.
 Mark: Worked on the following classes HobbyDTO, PersonDTO, Person, Hobby, HobbyFacade, PersonFacade. 
-Henrik: Worked on exceptions package and the following classes AddressDTO, CityInfoDTO, ExceptionDTO, PhoneDTO, Address, CityInfo, Phone, AddressNotFound, AddressNotFoundMapper,
-AddressFacade, CityInfoFacade, PhoneFacade og PersonResource.
+Henrik: Worked on exceptions package and the following classes AddressDTO, CityInfoDTO, ExceptionDTO, PhoneDTO, Address, CityInfo, Phone, PersonNotFoundException, PersonNotFoundMapper, CityInfoFacade, PersonFacade, PersonResource and index.html.
 
 What did your team accomplish during this sprint?
 We have somewhat finished the foundation of the projekt. We have a worked CI-pipeline. we are somewhat ready for testing of Addresses. 

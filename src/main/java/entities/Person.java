@@ -1,10 +1,13 @@
 package entities;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Person implements Serializable {
@@ -18,8 +21,8 @@ public class Person implements Serializable {
     private String fName;
     //skal have annotation her.
     private String phonenumber;
-    //skal have annotation her.
-    private String hobby;
+    @OneToOne(cascade = CascadeType.PERSIST)
+    private Hobby hobby;
     //skal have annotation her.
     private String address;
     //skal have annotation her.
@@ -33,6 +36,19 @@ public class Person implements Serializable {
         this.email = email;
         this.lName = fName;
         this.fName = lName;
+    }
+    
+     public Hobby getHobby() {
+        return hobby;
+    }
+
+    public void setHobby(Hobby hobby){
+        if(hobby != null){
+            this.hobby = hobby;
+            hobby.addPerson(this);
+        } else {
+            this.hobby = null;
+        }
     }
 
     public String getEmail() {
