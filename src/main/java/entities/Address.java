@@ -1,10 +1,12 @@
 package entities;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 
 @Entity
@@ -14,8 +16,11 @@ public class Address implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String street;
     private String additionalInfo;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    private CityInfo cityinfo;
 
     public Address() {
     }
@@ -25,6 +30,19 @@ public class Address implements Serializable {
         this.additionalInfo = additionalInfo;
     }
 
+    public CityInfo getCityInfo() {
+        return cityinfo;
+    }
+    
+    public void setCityInfo(CityInfo cityinfo){
+        if(cityinfo != null){
+            this.cityinfo = cityinfo;
+            cityinfo.addAddress(this);
+        } else {
+            this.cityinfo = null;
+        }
+    }
+    
     public String getStreet() {
         return street;
     }
@@ -41,9 +59,12 @@ public class Address implements Serializable {
         this.additionalInfo = additionalInfo;
     }
 
-    @Override
-    public String toString() {
-        return "Address{" + "street=" + street + ", additionalInfo=" + additionalInfo + '}';
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
 }
