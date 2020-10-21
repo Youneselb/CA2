@@ -33,7 +33,7 @@ public class PersonFacade {
         //Hobby h1 = new Hobby("csgo","wikicsgo","gaming","spil");
         Hobby h2 = new Hobby("csgo","wikicsgo","gaming","spil");
         //p1.setHobby(h1);
-        p2.setHobby(h2);
+        p2.addHobby(h2);
         try {
             em.getTransaction().begin();
             em.persist(p2);

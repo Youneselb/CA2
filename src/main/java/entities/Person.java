@@ -1,7 +1,9 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,7 +16,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-
 @Entity
 public class Person implements Serializable {
 
@@ -26,14 +27,15 @@ public class Person implements Serializable {
     private String email;
     private String lName;
     private String fName;
-    //skal have annotation her.
-    private String phonenumber;
     @ManyToMany(cascade = CascadeType.PERSIST)
-    @JoinTable(name="hobby_person", joinColumns={@JoinColumn(name="persons_ID")}, inverseJoinColumns={@JoinColumn(name="Hobby_ID")})
-    private Hobby hobby;
+    @JoinTable(
+            name = "hobby_person",
+            joinColumns = @JoinColumn(name = "persons_ID"),
+            inverseJoinColumns = @JoinColumn(name = "Hobby_ID"))
+    private List<Hobby> hobbys;
     @OneToMany(mappedBy = "person")
     private List<Phone> phones;
-    @ManyToOne(cascade = {CascadeType.PERSIST})
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Address address;
 
     public Person() {
@@ -43,18 +45,12 @@ public class Person implements Serializable {
         this.email = email;
         this.lName = fName;
         this.fName = lName;
+        hobbys = new ArrayList<>();
     }
 
-    public Hobby getHobby() {
-        return hobby;
-    }
-
-    public void setHobby(Hobby hobby) {
+    public void addHobby(Hobby hobby) {
         if (hobby != null) {
-            this.hobby = hobby;
-            hobby.addPerson(this);
-        } else {
-            this.hobby = null;
+            hobbys.add(hobby);
         }
     }
 
