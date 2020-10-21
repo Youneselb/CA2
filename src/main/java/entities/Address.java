@@ -33,6 +33,7 @@ public class Address implements Serializable {
     public Address(String street, String additionalInfo) {
         this.street = street;
         this.additionalInfo = additionalInfo;
+        persons = new ArrayList<>();
     }
 
     public CityInfo getCityInfo() {
