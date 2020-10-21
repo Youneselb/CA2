@@ -22,7 +22,6 @@ public class Person implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false)
     private String email;
     private String lName;
     private String fName;
@@ -31,7 +30,7 @@ public class Person implements Serializable {
         @JoinColumn(name = "persons_ID")}, inverseJoinColumns = {
         @JoinColumn(name = "Hobby_ID")})
     private List<Hobby> hobby;
-    @OneToMany(mappedBy = "person")
+    @OneToMany(mappedBy = "person",cascade = CascadeType.PERSIST)
     private List<Phone> phones;
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Address address;
@@ -44,6 +43,7 @@ public class Person implements Serializable {
         this.lName = fName;
         this.fName = lName;
         hobby = new ArrayList<>();
+        phones = new ArrayList<>();
     }
 
     public void addHobby(Hobby hobby) {
@@ -119,13 +119,16 @@ public class Person implements Serializable {
             phones.add(phone);
         }
     }
+    
+    
+    
 
-    public void setPhone(Phone phone) {
-        if (phone != null) {
-            phone.setPerson(this);
-        } else {
-            this.hobby = null;
-        }
-    }
+//    public void setPhone(Phone phone) {
+//        if (phone != null) {
+//            phone.setPerson(this);
+//        } else {
+//            this.hobby = null;
+//        }
+//    }
 
 }

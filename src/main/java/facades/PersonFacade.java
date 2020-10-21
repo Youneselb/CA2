@@ -1,6 +1,7 @@
 package facades;
 
 import entities.Address;
+import entities.CityInfo;
 import entities.Hobby;
 import entities.Person;
 import entities.Phone;
@@ -37,11 +38,11 @@ public class PersonFacade {
         
         Phone ph1 = new Phone(25252525,"yes");
         Address a1 = new Address("groovestreet","yes");
-        //p1.setHobby(h1);
+        CityInfo c1 = new CityInfo("9000","bigstreet");
+        a1.setCityInfo(c1);
         p2.setHobby(h2);
         p2.addPhone(ph1);
         p2.setAddress(a1);
-
         try {
             em.getTransaction().begin();
             em.persist(p2);
