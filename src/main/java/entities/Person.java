@@ -3,7 +3,6 @@ package entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,11 +27,10 @@ public class Person implements Serializable {
     private String lName;
     private String fName;
     @ManyToMany(cascade = CascadeType.PERSIST)
-    @JoinTable(
-            name = "hobby_person",
-            joinColumns = @JoinColumn(name = "persons_ID"),
-            inverseJoinColumns = @JoinColumn(name = "Hobby_ID"))
-    private List<Hobby> hobbys;
+    @JoinTable(name = "hobby_person", joinColumns = {
+        @JoinColumn(name = "persons_ID")}, inverseJoinColumns = {
+        @JoinColumn(name = "Hobby_ID")})
+    private List<Hobby> hobby;
     @OneToMany(mappedBy = "person")
     private List<Phone> phones;
     @ManyToOne(cascade = CascadeType.PERSIST)
@@ -45,12 +43,29 @@ public class Person implements Serializable {
         this.email = email;
         this.lName = fName;
         this.fName = lName;
-        hobbys = new ArrayList<>();
+        hobby = new ArrayList<>();
     }
 
     public void addHobby(Hobby hobby) {
+        hobby.addPerson(this);
+        if (!this.hobby.contains(hobby)) {
+            this.hobby.add(hobby);
+        }
+    }
+
+    public List<Hobby> getHobbies() {
+        return hobby;
+    }
+
+    public void setHobbies(List<Hobby> hobbies) {
+        this.hobby = hobbies;
+    }
+
+    public void setHobby(Hobby hobby) {
         if (hobby != null) {
-            hobbys.add(hobby);
+            hobby.addPerson(this);
+        } else {
+            this.hobby = null;
         }
     }
 
@@ -104,4 +119,13 @@ public class Person implements Serializable {
             phones.add(phone);
         }
     }
+
+    public void setPhone(Phone phone) {
+        if (phone != null) {
+            phone.setPerson(this);
+        } else {
+            this.hobby = null;
+        }
+    }
+
 }

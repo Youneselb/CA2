@@ -1,7 +1,9 @@
 package facades;
 
+import entities.Address;
 import entities.Hobby;
 import entities.Person;
+import entities.Phone;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import utils.EMF_Creator;
@@ -32,8 +34,14 @@ public class PersonFacade {
         Person p2 = new Person("someemail","inferno","mirage");
         //Hobby h1 = new Hobby("csgo","wikicsgo","gaming","spil");
         Hobby h2 = new Hobby("csgo","wikicsgo","gaming","spil");
+        
+        Phone ph1 = new Phone(25252525,"yes");
+        Address a1 = new Address("groovestreet","yes");
         //p1.setHobby(h1);
-        p2.addHobby(h2);
+        p2.setHobby(h2);
+        p2.addPhone(ph1);
+        p2.setAddress(a1);
+
         try {
             em.getTransaction().begin();
             em.persist(p2);
