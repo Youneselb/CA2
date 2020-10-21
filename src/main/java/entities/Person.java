@@ -1,6 +1,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -21,8 +23,8 @@ public class Person implements Serializable {
     private String lName;
     private String fName;
     //skal have annotation her.
-    private String phonenumber;
-
+    @OneToMany(mappedBy = "person")
+    private List<Phone> phones;
     private Hobby hobby;
     @ManyToOne(cascade = {CascadeType.PERSIST})
     private Address address;
@@ -96,4 +98,9 @@ public class Person implements Serializable {
         }
     }
 
+    public void addPhone(Phone phone) {
+        if (phone != null) {
+            phones.add(phone);
+        }
+    }
 }
