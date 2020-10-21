@@ -1,16 +1,14 @@
 package dto;
 
 import entities.Hobby;
-import java.util.ArrayList;
-import java.util.List;
 
 public class HobbyDTO {
-    private long id;
+
     private String name;
     private String wikiLink;
     private String category;
     private String type;
-    
+
     public HobbyDTO() {
     }
 
@@ -21,9 +19,7 @@ public class HobbyDTO {
         this.type = type;
     }
 
-
-    public HobbyDTO(Hobby hobby)  {
-        this.id = hobby.getId();
+    public HobbyDTO(Hobby hobby) {
         this.name = hobby.getName();
         this.wikiLink = hobby.getWikiLink();
         this.category = hobby.getCategory();
@@ -53,16 +49,6 @@ public class HobbyDTO {
     public void setType(String type) {
         this.type = type;
     }
-    
-    
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -71,9 +57,5 @@ public class HobbyDTO {
     public void setName(String name) {
         this.name = name;
     }
-
-    
-    
-      
 
 }

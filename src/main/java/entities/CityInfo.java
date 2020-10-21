@@ -16,14 +16,13 @@ public class CityInfo implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    private Long id;
     @Column(length = 4)
     private String zipCode;
     @Column(length = 35)
     private String city;
     @OneToMany(mappedBy = "cityinfo")
     private List<Address> addresses;
-    
+
     public CityInfo() {
     }
 
@@ -33,26 +32,18 @@ public class CityInfo implements Serializable {
         addresses = new ArrayList<>();
     }
 
-    public void addAddress(Address address){
-        if(address != null){
+    public void addAddress(Address address) {
+        if (address != null) {
             addresses.add(address);
         }
     }
-    
+
     public String getZipCode() {
         return zipCode;
     }
 
     public String getCity() {
         return city;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
 }
