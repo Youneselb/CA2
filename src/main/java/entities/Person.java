@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -21,9 +22,9 @@ public class Person implements Serializable {
     private String fName;
     //skal have annotation her.
     private String phonenumber;
-    @OneToOne(cascade = CascadeType.PERSIST)
+    
     private Hobby hobby;
-    //skal have annotation her.
+    @ManyToOne(cascade = {CascadeType.PERSIST}) 
     private String address;
     //skal have annotation her.
     private String city;
