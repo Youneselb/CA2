@@ -1,6 +1,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
+
 
 @Entity
 public class Person implements Serializable {
@@ -29,10 +31,10 @@ public class Person implements Serializable {
     @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(name="hobby_person", joinColumns={@JoinColumn(name="persons_ID")}, inverseJoinColumns={@JoinColumn(name="Hobby_ID")})
     private Hobby hobby;
+    @OneToMany(mappedBy = "person")
+    private List<Phone> phones;
     @ManyToOne(cascade = {CascadeType.PERSIST})
     private Address address;
-    //skal have annotation her.
-    private String city;
 
     public Person() {
     }
@@ -101,4 +103,9 @@ public class Person implements Serializable {
         }
     }
 
+    public void addPhone(Phone phone) {
+        if (phone != null) {
+            phones.add(phone);
+        }
+    }
 }
