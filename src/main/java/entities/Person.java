@@ -22,13 +22,12 @@ public class Person implements Serializable {
     private String fName;
     //skal have annotation her.
     private String phonenumber;
-    
+
     private Hobby hobby;
-    @ManyToOne(cascade = {CascadeType.PERSIST}) 
-    private String address;
+    @ManyToOne(cascade = {CascadeType.PERSIST})
+    private Address address;
     //skal have annotation her.
     private String city;
-    
 
     public Person() {
     }
@@ -38,13 +37,13 @@ public class Person implements Serializable {
         this.lName = fName;
         this.fName = lName;
     }
-    
-     public Hobby getHobby() {
+
+    public Hobby getHobby() {
         return hobby;
     }
 
-    public void setHobby(Hobby hobby){
-        if(hobby != null){
+    public void setHobby(Hobby hobby) {
+        if (hobby != null) {
             this.hobby = hobby;
             hobby.addPerson(this);
         } else {
@@ -75,8 +74,7 @@ public class Person implements Serializable {
     public void setfName(String fName) {
         this.fName = fName;
     }
-    
-    
+
     public Long getId() {
         return id;
     }
@@ -85,17 +83,17 @@ public class Person implements Serializable {
         this.id = id;
     }
 
-     public Address getAddress() {
+    public Address getAddress() {
         return address;
     }
 
     public void setAddress(Address address) {
-        this.address = address;
-        if(address != null) {
+        if (address != null) {
+            this.address = address;
             address.addPerson(this);
+        } else {
+            this.address = null;
         }
     }
-    
-    
-   
+
 }
