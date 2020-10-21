@@ -22,12 +22,12 @@ public class Hobby implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(length = 50)
+    @Column(nullable = false, unique = true)
     private String name;
     private String wikiLink;
     private String category;
     private String type;
-    @OneToOne(mappedBy = "hobby")
+    @ManyToMany(mappedBy = "hobby")
     private List<Person> persons;
     
     

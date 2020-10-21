@@ -28,14 +28,16 @@ public class PersonFacade {
         
         EntityManager em = emf.createEntityManager();
         
-        Person p1 = new Person("testemail","fornavn","efternavn");
-        Hobby h1 = new Hobby("csgo","wikicsgo","gaming","spil");
-        
-        p1.setHobby(h1);
-        
+        //Person p1 = new Person("testemail","fornavn","efternavn");
+        Person p2 = new Person("someemail","inferno","mirage");
+        //Hobby h1 = new Hobby("csgo","wikicsgo","gaming","spil");
+        Hobby h2 = new Hobby("csgo","wikicsgo","gaming","spil");
+        //p1.setHobby(h1);
+        p2.setHobby(h2);
         try {
             em.getTransaction().begin();
-            em.persist(p1);
+            em.persist(p2);
+            //em.persist(p1);
             em.getTransaction().commit();
         } finally {
             em.close();
