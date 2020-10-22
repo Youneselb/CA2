@@ -1,12 +1,16 @@
 package facades;
 
+import dto.PersonDTO;
 import entities.Address;
 import entities.CityInfo;
 import entities.Hobby;
 import entities.Person;
 import entities.Phone;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.TypedQuery;
 import utils.EMF_Creator;
 
 public class PersonFacade {
@@ -14,6 +18,19 @@ public class PersonFacade {
     private static PersonFacade instance;
     private static EntityManagerFactory emf;
 
+    public List<PersonDTO> getAllPersons() {
+        EntityManager em = emf.createEntityManager();
+        TypedQuery<Person> query =  em.createQuery("SELECT p FROM Persons p",Person.class);
+        List<Person> persons = query.getResultList();
+        List<PersonDTO> personsDTOs = new ArrayList();
+        persons.forEach((Person person) -> {
+            personsDTOs.add(new PersonDTO(person));
+        });
+        return personsDTOs;     
+    }
+    
+
+            
     public static PersonFacade getPersonFacade(EntityManagerFactory _emf) {
         if (instance == null) {
             emf = _emf;
