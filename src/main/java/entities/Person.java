@@ -21,6 +21,7 @@ public class Person implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false)
     private Long id;
     private String email;
     private String lName;
@@ -30,7 +31,8 @@ public class Person implements Serializable {
         @JoinColumn(name = "persons_ID")}, inverseJoinColumns = {
         @JoinColumn(name = "Hobby_ID")})
     private List<Hobby> hobby;
-    @OneToMany(mappedBy = "person",cascade = CascadeType.PERSIST)
+
+    @OneToMany(mappedBy = "person", cascade = CascadeType.PERSIST)
     private List<Phone> phones;
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Address address;
@@ -93,16 +95,16 @@ public class Person implements Serializable {
         this.fName = fName;
     }
 
+    public Address getAddress() {
+        return address;
+    }
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Address getAddress() {
-        return address;
     }
 
     public void setAddress(Address address) {
@@ -130,5 +132,6 @@ public class Person implements Serializable {
 //            this.hobby = null;
 //        }
 //    }
+
 
 }

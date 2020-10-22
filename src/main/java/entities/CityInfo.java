@@ -27,7 +27,7 @@ public class CityInfo implements Serializable {
     @OneToMany(mappedBy = "cityinfo")
      @JoinColumn(name = "address_id")
     private List<Address> addresses;
-    
+
     public CityInfo() {
     }
 
@@ -37,26 +37,18 @@ public class CityInfo implements Serializable {
         addresses = new ArrayList<>();
     }
 
-    public void addAddress(Address address){
-        if(address != null){
+    public void addAddress(Address address) {
+        if (address != null) {
             addresses.add(address);
         }
     }
-    
+
     public String getZipCode() {
         return zipCode;
     }
 
     public String getCity() {
         return city;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
 }
