@@ -63,12 +63,12 @@ public class PersonFacade {
         Address a1 = new Address("Stenløse", "3660");       
         Hobby h1 = new Hobby("csgo","wikicsgo","gaming","spil");
         Phone ph1 = new Phone(25252525,"yes");
-   
+        
+        
         p1.setAddress(a1);
         p1.addPhone(ph1);
-        p1.setHobby(h1);
+        p1.addHobby(h1);
         
-       
 
         try {
             em.getTransaction().begin();
