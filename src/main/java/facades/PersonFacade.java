@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import utils.EMF_Creator;
 
@@ -27,6 +28,16 @@ public class PersonFacade {
             personsDTOs.add(new PersonDTO(person));
         });
         return personsDTOs;     
+    }
+    
+    public List<PersonDTO> getPersonsByHobby(String hobby) {
+        EntityManager em = emf.createEntityManager();
+        Query query = em.createQuery("SELECT p FROM Person p JOIN p.hobbies h WHERE h.hName=:hobby");
+        query.setParameter("hobby", hobby);
+        List<Person> personDetails = query.getResultList();
+        List<PersonDTO> personDTOList = new ArrayList<>();
+        personDetails.forEach((Person person) -> personDTOList.add(new PersonDTO(person)));
+        return personDTOList;
     }
     
 
