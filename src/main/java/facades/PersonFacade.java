@@ -49,11 +49,13 @@ public class PersonFacade {
         EntityManager em = emf.createEntityManager();
         
         Person p1 = new Person("someemail","inferno","mirage");
-        Address a1 = new Address("Stenløse", "3660");       
+        Address a1 = new Address("PriestStreet", "2. TV");       
         Hobby h1 = new Hobby("csgo","wikicsgo","gaming","spil");
         Phone ph1 = new Phone(25252525,"yes");
+        CityInfo c1 = new CityInfo("3660", "Stenløse");
         
         
+        a1.setCityInfo(c1);
         p1.setAddress(a1);
         p1.addPhone(ph1);
         p1.addHobby(h1);
