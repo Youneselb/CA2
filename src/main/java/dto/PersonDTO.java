@@ -7,7 +7,9 @@ public class PersonDTO {
     private String email;
     private String fName;
     private String lName;
-    private String hobby;
+    private String street;
+    private String additionalinfo;
+    
 
     public PersonDTO() {
     }
@@ -24,8 +26,29 @@ public class PersonDTO {
         this.email = person.getEmail();
         this.fName = person.getfName();
         this.lName = person.getlName();
+        this.street = person.getAddress().getStreet();
+        this.additionalinfo = person.getAddress().getAdditionalInfo();
+        
         
     }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getAdditionalinfo() {
+        return additionalinfo;
+    }
+
+    public void setAdditionalinfo(String additionalinfo) {
+        this.additionalinfo = additionalinfo;
+    }
+    
+    
 
     public long getId() {
         return id;

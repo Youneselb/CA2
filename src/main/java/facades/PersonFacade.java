@@ -72,6 +72,18 @@ public class PersonFacade {
         return new PersonDTO(person);
     }
 
+    public List<PersonDTO> getPersonsByCity(String city) {
+        EntityManager em = emf.createEntityManager();
+        Query query = em.createQuery("SELECT p FROM Person p JOIN a.address a WHERE a.street=:city");
+        query.setParameter("city", city);
+        List<Person> personCity = query.getResultList();
+        List<PersonDTO> personDTOList = new ArrayList<>();
+        personCity.forEach((Person person) -> personDTOList.add(new PersonDTO(person)));
+        return personDTOList;
+    }
+    
+            
+
     public PersonDTO editPerson(PersonDTO p) throws PersonNotFoundException, MissingInputException {
         if ((p.getfName().length() == 0) || (p.getlName().length() == 0)) {
             throw new MissingInputException("First name and/or Last Name is missing");
