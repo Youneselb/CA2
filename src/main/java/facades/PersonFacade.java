@@ -61,7 +61,7 @@ public class PersonFacade {
         }
         EntityManager em = getEntityManager();
         Person person = new Person(email, fName, lName);
-        
+
         try {
             em.getTransaction().begin();
             em.persist(person);
@@ -76,9 +76,9 @@ public class PersonFacade {
         if ((p.getfName().length() == 0) || (p.getlName().length() == 0)) {
             throw new MissingInputException("First name and/or Last Name is missing");
         }
-        
+
         EntityManager em = getEntityManager();
-        
+
         try {
             em.getTransaction().begin();
             Person person = em.find(Person.class, p.getId());
@@ -95,7 +95,7 @@ public class PersonFacade {
             em.close();
         }
     }
-    
+
     public static PersonFacade getPersonFacade(EntityManagerFactory _emf) {
         if (instance == null) {
             emf = _emf;
@@ -113,21 +113,21 @@ public class PersonFacade {
         EntityManagerFactory emf = EMF_Creator.createEntityManagerFactory();
         EntityManager em = emf.createEntityManager();
 
-        Person p1 = new Person("someemail", "inferno", "mirage");
-        Phone ph1 = new Phone(25252525, "yes");
-        Address a1 = new Address("groovestreet", "yes", em.find(CityInfo.class, "0800"));
-
-        p1.setAddress(a1);
-        p1.addPhone(ph1);
-        p1.addHobby(em.find(Hobby.class, "Airsoft"));
-
-        try {
-            em.getTransaction().begin();
-            em.persist(p1);
-            em.getTransaction().commit();
-        } finally {
-            em.close();
-        }
+//        Person p1 = new Person("someemail", "inferno", "mirage");
+//        Phone ph1 = new Phone(25252525, "yes");
+//        Address a1 = new Address("groovestreet", "yes", em.find(CityInfo.class, "0800"));
+//
+//        p1.setAddress(a1);
+//        p1.addPhone(ph1);
+//        p1.addHobby(em.find(Hobby.class, "Airsoft"));
+//
+//        try {
+//            em.getTransaction().begin();
+//            em.persist(p1);
+//            em.getTransaction().commit();
+//        } finally {
+//            em.close();
+//        }
     }
 
 }
