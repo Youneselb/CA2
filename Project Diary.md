@@ -31,12 +31,11 @@ Everybody was active.
 
 Who did what, during this sprint?
 Yones: Some methods for personfacade, and rest endpoints. A little start on tests.
-Mark:
-Henrik:
+Mark: Finish the entities classes and made some metodes in the personfacade.
+Henrik: Finish the entities classes and made some metodes in the personfacade and added som endpoints.
 
 What did your team accomplish during this spring?
-
-
+The entities and done and somewhat ready for testing. The database is ready for testing and additions.
 
 Phase three (Friday 23/10- Sunday 25/10):
 Who was active during this sprint?
