@@ -3,7 +3,6 @@ package rest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import dto.PersonDTO;
-import exceptions.PersonNotFoundException;
 import facades.CityInfoFacade;
 import facades.HobbyFacade;
 import facades.PersonFacade;
