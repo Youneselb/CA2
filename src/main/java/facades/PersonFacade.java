@@ -1,5 +1,6 @@
 package facades;
 
+import dto.CityInfoDTO;
 import dto.PersonDTO;
 import entities.Address;
 import entities.CityInfo;
@@ -40,6 +41,17 @@ public class PersonFacade {
         return personDTOList;
     }
     
+    public List<CityInfoDTO> getAllZipCodes(){
+        EntityManager em = emf.createEntityManager();
+        TypedQuery<CityInfo> query =  em.createQuery("SELECT c FROM cityinfo c",CityInfo.class);
+        List<CityInfo> cityinfos = query.getResultList();
+        List<CityInfoDTO> zipcodes = new ArrayList();
+        cityinfos.forEach((CityInfo cityinfo) -> {
+            zipcodes.add(new CityInfoDTO(cityinfo));
+        });
+        return zipcodes;
+        
+    }
 
             
     public static PersonFacade getPersonFacade(EntityManagerFactory _emf) {
