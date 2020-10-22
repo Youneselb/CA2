@@ -7,6 +7,7 @@ public class PersonDTO {
     private String email;
     private String fName;
     private String lName;
+    private String hobby;
 
     public PersonDTO() {
     }
@@ -23,6 +24,7 @@ public class PersonDTO {
         this.email = person.getEmail();
         this.fName = person.getfName();
         this.lName = person.getlName();
+        
     }
 
     public long getId() {

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import utils.EMF_Creator;
 
@@ -27,6 +28,16 @@ public class PersonFacade {
             personsDTOs.add(new PersonDTO(person));
         });
         return personsDTOs;     
+    }
+    
+    public List<PersonDTO> getPersonsByHobby(String hobby) {
+        EntityManager em = emf.createEntityManager();
+        Query query = em.createQuery("SELECT p FROM Person p JOIN p.hobbies h WHERE h.hName=:hobby");
+        query.setParameter("hobby", hobby);
+        List<Person> personDetails = query.getResultList();
+        List<PersonDTO> personDTOList = new ArrayList<>();
+        personDetails.forEach((Person person) -> personDTOList.add(new PersonDTO(person)));
+        return personDTOList;
     }
     
 
@@ -49,18 +60,15 @@ public class PersonFacade {
         EntityManager em = emf.createEntityManager();
         
         Person p1 = new Person("someemail","inferno","mirage");
-        Address a1 = new Address("PriestStreet", "2. TV");       
         Hobby h1 = new Hobby("csgo","wikicsgo","gaming","spil");
         Phone ph1 = new Phone(25252525,"yes");
-        CityInfo c1 = new CityInfo("3660", "Stenløse");
-        
-        
+        Address a1 = new Address("groovestreet","yes");
+        CityInfo c1 = new CityInfo("9000","bigstreet");
+
         a1.setCityInfo(c1);
         p1.setAddress(a1);
         p1.addPhone(ph1);
         p1.addHobby(h1);
-        
-
         try {
             em.getTransaction().begin();
             em.persist(p1);            

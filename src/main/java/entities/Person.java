@@ -31,6 +31,7 @@ public class Person implements Serializable {
         @JoinColumn(name = "persons_ID")}, inverseJoinColumns = {
         @JoinColumn(name = "Hobby_ID")})
     private List<Hobby> hobby;
+
     @OneToMany(mappedBy = "person", cascade = CascadeType.PERSIST)
     private List<Phone> phones;
     @ManyToOne(cascade = CascadeType.PERSIST)
@@ -120,5 +121,17 @@ public class Person implements Serializable {
             phones.add(phone);
         }
     }
+    
+    
+    
+
+//    public void setPhone(Phone phone) {
+//        if (phone != null) {
+//            phone.setPerson(this);
+//        } else {
+//            this.hobby = null;
+//        }
+//    }
+
 
 }
