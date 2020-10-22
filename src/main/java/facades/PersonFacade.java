@@ -63,10 +63,9 @@ public class PersonFacade {
         Phone ph1 = new Phone(25252525,"yes");
         Address a1 = new Address("groovestreet","yes", em.find(CityInfo.class, "0800"));
         
-        
         p1.setAddress(a1);
         p1.addPhone(ph1);
-        
+        p1.addHobby(em.find(Hobby.class, "Airsoft"));
  
         try {
             em.getTransaction().begin();
