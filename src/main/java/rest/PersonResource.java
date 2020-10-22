@@ -10,6 +10,7 @@ import facades.PersonFacade;
 import java.util.List;
 import utils.EMF_Creator;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityNotFoundException;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -33,6 +34,23 @@ public class PersonResource {
     public String serverIsUp() {
         return "{\"msg\":\"API is running\"}";
     }
+    @Path("/hobby/{hobby}")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getPersonsByHobby(@PathParam("hobby") String hobby) throws EntityNotFoundException{
+        List<PersonDTO> personList = PERSONFACADE.getPersonsByHobby(hobby);
+
+        if(personList.isEmpty()){
+            throw new EntityNotFoundException("Hobby does not excist");
+        }
+
+        return Response.ok()
+                .entity(GSON.toJson(personList))
+                .build();
+
+    }
+    
+    
 }
 
 
