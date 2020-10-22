@@ -7,6 +7,8 @@ import entities.CityInfo;
 import entities.Hobby;
 import entities.Person;
 import entities.Phone;
+import exceptions.MissingInputException;
+import exceptions.PersonNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -22,15 +24,15 @@ public class PersonFacade {
 
     public List<PersonDTO> getAllPersons() {
         EntityManager em = emf.createEntityManager();
-        TypedQuery<Person> query =  em.createQuery("SELECT p FROM Persons p",Person.class);
+        TypedQuery<Person> query = em.createQuery("SELECT p FROM Persons p", Person.class);
         List<Person> persons = query.getResultList();
         List<PersonDTO> personsDTOs = new ArrayList();
         persons.forEach((Person person) -> {
             personsDTOs.add(new PersonDTO(person));
         });
-        return personsDTOs;     
+        return personsDTOs;
     }
-    
+
     public List<PersonDTO> getPersonsByHobby(String hobby) {
         EntityManager em = emf.createEntityManager();
         Query query = em.createQuery("SELECT p FROM Person p JOIN p.hobbies h WHERE h.hName=:hobby");
@@ -40,20 +42,60 @@ public class PersonFacade {
         personDetails.forEach((Person person) -> personDTOList.add(new PersonDTO(person)));
         return personDTOList;
     }
-    
-    public List<CityInfoDTO> getAllZipCodes(){
+
+    public List<CityInfoDTO> getAllZipCodes() {
         EntityManager em = emf.createEntityManager();
-        TypedQuery<CityInfo> query =  em.createQuery("SELECT c FROM cityinfo c",CityInfo.class);
+        TypedQuery<CityInfo> query = em.createQuery("SELECT c FROM cityinfo c", CityInfo.class);
         List<CityInfo> cityinfos = query.getResultList();
         List<CityInfoDTO> zipcodes = new ArrayList();
         cityinfos.forEach((CityInfo cityinfo) -> {
             zipcodes.add(new CityInfoDTO(cityinfo));
         });
         return zipcodes;
-        
+
     }
 
-            
+    public PersonDTO addPerson(String email, String fName, String lName) throws MissingInputException {
+        if ((fName.length() == 0) || (lName.length() == 0)) {
+            throw new MissingInputException("First Name and/or last name is missing");
+        }
+        EntityManager em = getEntityManager();
+        Person person = new Person(email, fName, lName);
+        
+        try {
+            em.getTransaction().begin();
+            em.persist(person);
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+        return new PersonDTO(person);
+    }
+
+    public PersonDTO editPerson(PersonDTO p) throws PersonNotFoundException, MissingInputException {
+        if ((p.getfName().length() == 0) || (p.getlName().length() == 0)) {
+            throw new MissingInputException("First name and/or Last Name is missing");
+        }
+        
+        EntityManager em = getEntityManager();
+        
+        try {
+            em.getTransaction().begin();
+            Person person = em.find(Person.class, p.getId());
+            if (person == null) {
+                throw new PersonNotFoundException(String.format("Person with id: (%d) not found", p.getId()));
+            } else {
+                person.setEmail(p.getEmail());
+                person.setfName(p.getfName());
+                person.setlName(p.getlName());
+            }
+            em.getTransaction().commit();
+            return new PersonDTO(person);
+        } finally {
+            em.close();
+        }
+    }
+    
     public static PersonFacade getPersonFacade(EntityManagerFactory _emf) {
         if (instance == null) {
             emf = _emf;
@@ -65,29 +107,27 @@ public class PersonFacade {
     private EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
-    
+
     public static void main(String[] args) {
-        
+
         EntityManagerFactory emf = EMF_Creator.createEntityManagerFactory();
         EntityManager em = emf.createEntityManager();
-        
-        Person p1 = new Person("someemail","inferno","mirage");
-        Phone ph1 = new Phone(25252525,"yes");
-        Address a1 = new Address("groovestreet","yes", em.find(CityInfo.class, "0800"));
-        
+
+        Person p1 = new Person("someemail", "inferno", "mirage");
+        Phone ph1 = new Phone(25252525, "yes");
+        Address a1 = new Address("groovestreet", "yes", em.find(CityInfo.class, "0800"));
+
         p1.setAddress(a1);
         p1.addPhone(ph1);
         p1.addHobby(em.find(Hobby.class, "Airsoft"));
- 
+
         try {
             em.getTransaction().begin();
-            em.persist(p1);            
+            em.persist(p1);
             em.getTransaction().commit();
         } finally {
             em.close();
         }
     }
-        
-    }
 
-
+}

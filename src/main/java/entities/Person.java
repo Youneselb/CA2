@@ -23,8 +23,8 @@ public class Person implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String email;
-    private String lName;
     private String fName;
+    private String lName;
     @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(name = "hobby_person", joinColumns = {
         @JoinColumn(name = "persons_ID")}, inverseJoinColumns = {
