@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -20,6 +19,7 @@ public class Address implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String street;
     private String additionalInfo;
     @ManyToOne(cascade = CascadeType.PERSIST)
@@ -31,10 +31,11 @@ public class Address implements Serializable {
     public Address() {
     }
 
-    public Address(String street, String additionalInfo) {
+    public Address(String street, String additionalInfo, CityInfo cityinfo) {
         this.street = street;
         this.additionalInfo = additionalInfo;
         persons = new ArrayList<>();
+        this.cityinfo = cityinfo;
     }
 
     public CityInfo getCityInfo() {
@@ -71,5 +72,24 @@ public class Address implements Serializable {
             persons.add(person);
         }
     }
+    
+    public void addCityInfo(CityInfo cityInfo) {
+        if (cityInfo != null) {
+            this.cityinfo = cityinfo;
+            cityInfo.addAddress(this);
+        } else {
+            this.cityinfo = null;
+        }
+    }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    
+    
 }

@@ -60,15 +60,14 @@ public class PersonFacade {
         EntityManager em = emf.createEntityManager();
         
         Person p1 = new Person("someemail","inferno","mirage");
-        Hobby h1 = new Hobby("csgo","wikicsgo","gaming","spil");
         Phone ph1 = new Phone(25252525,"yes");
-        Address a1 = new Address("groovestreet","yes");
-        CityInfo c1 = new CityInfo("9000","bigstreet");
-
-        a1.setCityInfo(c1);
+        Address a1 = new Address("groovestreet","yes", em.find(CityInfo.class, "0800"));
+        
+        
         p1.setAddress(a1);
         p1.addPhone(ph1);
-        p1.addHobby(h1);
+        
+ 
         try {
             em.getTransaction().begin();
             em.persist(p1);            
