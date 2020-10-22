@@ -53,6 +53,16 @@ public class PersonFacade {
         
     }
 
+    public List<PersonDTO> getPersonsByCity(String city) {
+        EntityManager em = emf.createEntityManager();
+        Query query = em.createQuery("SELECT p FROM Person p JOIN a.address a WHERE a.street=:city");
+        query.setParameter("city", city);
+        List<Person> personCity = query.getResultList();
+        List<PersonDTO> personDTOList = new ArrayList<>();
+        personCity.forEach((Person person) -> personDTOList.add(new PersonDTO(person)));
+        return personDTOList;
+    }
+    
             
     public static PersonFacade getPersonFacade(EntityManagerFactory _emf) {
         if (instance == null) {
