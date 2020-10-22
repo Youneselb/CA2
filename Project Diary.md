@@ -27,10 +27,16 @@ Our database has been updated with sql scripts. Our API documentation for this s
 Phase two (Wednesday 21/10-Thursday 22/10):
 
 Who was active during this sprint?
+Everybody was active.
 
 Who did what, during this sprint?
+Yones: Some methods for personfacade, and rest endpoints. A little start on tests.
+Mark:
+Henrik:
 
 What did your team accomplish during this spring?
+
+
 
 Phase three (Friday 23/10- Sunday 25/10):
 Who was active during this sprint?
