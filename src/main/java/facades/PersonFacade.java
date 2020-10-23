@@ -36,15 +36,16 @@ public class PersonFacade {
 
     public List<PersonDTO> getPersonsByHobby(String hobby) {
         EntityManager em = emf.createEntityManager();
-        Query query = em.createQuery("SELECT h FROM HOBBY h JOIN h h WHERE h.name=:name");
+        Query query = em.createQuery("SELECT h.persons FROM Hobby h WHERE h.name = :hobby");
         query.setParameter("hobby", hobby);
-        List<Person> personDetails = query.getResultList();
-        List<PersonDTO> personDTOList = new ArrayList<>();
-        personDetails.forEach((Person person) -> personDTOList.add(new PersonDTO(person)));
-        return personDTOList;
+        List<Person> persons = query.getResultList();
+        List<PersonDTO> personsDTOs = new ArrayList();                      
+        persons.forEach((Person person) -> personsDTOs.add(new PersonDTO(person)));
+        return personsDTOs;
+      
     }
     
-    public static List<HobbyDTO> getHobbies() {
+    public List<HobbyDTO> getHobbies() {
         EntityManager em = emf.createEntityManager();
         TypedQuery<Hobby> query = em.createQuery("SELECT h FROM Hobby h", Hobby.class);
         List<Hobby> hobbies = query.getResultList();
@@ -112,8 +113,6 @@ public class PersonFacade {
         personCity.forEach((Person person) -> personDTOList.add(new PersonDTO(person)));
         return personDTOList;
     }
-    
-            
 
     public PersonDTO editPerson(PersonDTO p) throws PersonNotFoundException, MissingInputException {
         if ((p.getfName().length() == 0) || (p.getlName().length() == 0)) {
@@ -164,7 +163,6 @@ public class PersonFacade {
         p1.addPhone(ph1);
         p1.addHobby(em.find(Hobby.class, "Airsoft"));
         //addPerson("addpersonemail","Nuke","Train","bhops","script",30303030,"+45","2765","Trapshooting");
-        System.out.println(getHobbies());
         try {
             em.getTransaction().begin();
             em.persist(p1);
@@ -172,6 +170,26 @@ public class PersonFacade {
         } finally {
             em.close();
         }
+//        EntityManagerFactory emf = EMF_Creator.createEntityManagerFactory();
+//        EntityManager em = emf.createEntityManager();
+        
+//        Person p1 = new Person("someemail", "inferno", "mirage");
+//        Phone ph1 = new Phone(25252525, "yes");
+//        Address a1 = new Address("groovestreet", "yes", em.find(CityInfo.class, "0800"));
+//
+//        p1.setAddress(a1);
+//        p1.addPhone(ph1);
+//        p1.addHobby(em.find(Hobby.class, "Airsoft"));
+//
+//        try {
+//            em.getTransaction().begin();
+//            em.persist(p1);
+//            em.getTransaction().commit();
+//        } finally {
+//            em.close();
+//        }
+//        PersonFacade pf = getPersonFacade(emf);
+//        System.out.println(pf.getPersonsByHobby("Airsoft"));
     }
 
 }
