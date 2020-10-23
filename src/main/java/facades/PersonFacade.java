@@ -36,12 +36,13 @@ public class PersonFacade {
 
     public List<PersonDTO> getPersonsByHobby(String hobby) {
         EntityManager em = emf.createEntityManager();
-        Query query = em.createQuery("SELECT h.name FROM HOBBY inner join hobby_person on h.name = :hobby");
+        Query query = em.createQuery("SELECT h.persons FROM Hobby h WHERE h.name = :hobby");
         query.setParameter("hobby", hobby);
-        List<Person> personDetails = query.getResultList();
-        List<PersonDTO> personDTOList = new ArrayList<>();
-        personDetails.forEach((Person person) -> personDTOList.add(new PersonDTO(person)));
-        return personDTOList;
+        List<Person> persons = query.getResultList();
+        List<PersonDTO> personsDTOs = new ArrayList();                      
+        persons.forEach((Person person) -> personsDTOs.add(new PersonDTO(person)));
+        return personsDTOs;
+      
     }
 
     public List<HobbyDTO> getHobbies() {
@@ -130,9 +131,9 @@ public class PersonFacade {
 
     public static void main(String[] args) {
 
-        EntityManagerFactory emf = EMF_Creator.createEntityManagerFactory();
-        EntityManager em = emf.createEntityManager();
-
+//        EntityManagerFactory emf = EMF_Creator.createEntityManagerFactory();
+//        EntityManager em = emf.createEntityManager();
+        
 //        Person p1 = new Person("someemail", "inferno", "mirage");
 //        Phone ph1 = new Phone(25252525, "yes");
 //        Address a1 = new Address("groovestreet", "yes", em.find(CityInfo.class, "0800"));
@@ -148,6 +149,8 @@ public class PersonFacade {
 //        } finally {
 //            em.close();
 //        }
+//        PersonFacade pf = getPersonFacade(emf);
+//        System.out.println(pf.getPersonsByHobby("Airsoft"));
     }
 
 }
