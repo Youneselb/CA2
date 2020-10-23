@@ -33,7 +33,7 @@ public class PersonFacade {
         });
         return personsDTOs;
     }
-
+    
     public List<PersonDTO> getPersonsByHobby(String hobby) {
         EntityManager em = emf.createEntityManager();
         Query query = em.createQuery("SELECT h.persons FROM Hobby h WHERE h.name = :hobby");
