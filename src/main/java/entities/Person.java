@@ -52,7 +52,7 @@ public class Person implements Serializable {
             this.hobby.add(hobby);
         }
     }
-
+    
     public List<Hobby> getHobbies() {
         return hobby;
     }

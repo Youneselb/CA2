@@ -44,7 +44,7 @@ public class PersonFacade {
         return personDTOList;
     }
     
-    public List<HobbyDTO> getHobbies() {
+    public static List<HobbyDTO> getHobbies() {
         EntityManager em = emf.createEntityManager();
         TypedQuery<Hobby> query = em.createQuery("SELECT h FROM Hobby h", Hobby.class);
         List<Hobby> hobbies = query.getResultList();
@@ -65,7 +65,8 @@ public class PersonFacade {
 
     }
 
-    public PersonDTO addPerson(String email, String fName, String lName) throws MissingInputException {
+    public PersonDTO addPerson(String email, String fName, String lName, String street, String additionalinfo,
+            int number, String description, String cityinfo, String hobby) throws MissingInputException {
         if ((fName.length() == 0) || (lName.length() == 0)) {
             throw new MissingInputException("First Name and/or last name is missing");
         }
@@ -74,6 +75,26 @@ public class PersonFacade {
 
         try {
             em.getTransaction().begin();
+            Query query = em.createQuery("SELECT a FROM Address a WHERE a.street = :street AND a.addtionalinfo = :addtionalinfo");
+			query.setParameter("street", street);
+			query.setParameter("additionalinfo",additionalinfo);
+                        Query query2 = em.createQuery("SELECT p FROM Phone p WHERE p.number = :number AND p.description = :description");
+			query2.setParameter("number", number);
+			query2.setParameter("description",description);
+			List<Address> addresses = query.getResultList();
+			if(addresses.size() > 0){
+		           person.setAddress(addresses.get(0));
+			} else {
+			   person.setAddress(new Address(street,additionalinfo, em.find(CityInfo.class, cityinfo)));
+			}
+                        List<Phone> phones = query2.getResultList();
+                        if(phones.size() > 0){
+		           person.addPhone(phones.get(0));
+			} else {                           
+                           person.addPhone(new Phone(number,description));
+                           
+			}
+                        person.addHobby(em.find(Hobby.class, hobby));
             em.persist(person);
             em.getTransaction().commit();
         } finally {
@@ -135,21 +156,22 @@ public class PersonFacade {
         EntityManagerFactory emf = EMF_Creator.createEntityManagerFactory();
         EntityManager em = emf.createEntityManager();
 
-//        Person p1 = new Person("someemail", "inferno", "mirage");
-//        Phone ph1 = new Phone(25252525, "yes");
-//        Address a1 = new Address("groovestreet", "yes", em.find(CityInfo.class, "0800"));
-//
-//        p1.setAddress(a1);
-//        p1.addPhone(ph1);
-//        p1.addHobby(em.find(Hobby.class, "Airsoft"));
-//
-//        try {
-//            em.getTransaction().begin();
-//            em.persist(p1);
-//            em.getTransaction().commit();
-//        } finally {
-//            em.close();
-//        }
+        Person p1 = new Person("someemail", "inferno", "mirage");
+        Phone ph1 = new Phone(25252525, "yes");
+        Address a1 = new Address("groovestreet", "yes", em.find(CityInfo.class, "0800"));
+
+        p1.setAddress(a1);
+        p1.addPhone(ph1);
+        p1.addHobby(em.find(Hobby.class, "Airsoft"));
+        //addPerson("addpersonemail","Nuke","Train","bhops","script",30303030,"+45","2765","Trapshooting");
+        System.out.println(getHobbies());
+        try {
+            em.getTransaction().begin();
+            em.persist(p1);
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
     }
 
 }
