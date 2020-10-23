@@ -1,6 +1,7 @@
 package facades;
 
 import dto.CityInfoDTO;
+import dto.HobbyDTO;
 import dto.PersonDTO;
 import entities.Address;
 import entities.CityInfo;
@@ -24,7 +25,7 @@ public class PersonFacade {
 
     public List<PersonDTO> getAllPersons() {
         EntityManager em = emf.createEntityManager();
-        TypedQuery<Person> query = em.createQuery("SELECT p FROM Persons p", Person.class);
+        TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p", Person.class);
         List<Person> persons = query.getResultList();
         List<PersonDTO> personsDTOs = new ArrayList();
         persons.forEach((Person person) -> {
@@ -35,12 +36,21 @@ public class PersonFacade {
 
     public List<PersonDTO> getPersonsByHobby(String hobby) {
         EntityManager em = emf.createEntityManager();
-        Query query = em.createQuery("SELECT p FROM Person p JOIN p.hobbies h WHERE h.hName=:hobby");
+        Query query = em.createQuery("SELECT h FROM HOBBY h JOIN h h WHERE h.name=:name");
         query.setParameter("hobby", hobby);
         List<Person> personDetails = query.getResultList();
         List<PersonDTO> personDTOList = new ArrayList<>();
         personDetails.forEach((Person person) -> personDTOList.add(new PersonDTO(person)));
         return personDTOList;
+    }
+    
+    public List<HobbyDTO> getHobbies() {
+        EntityManager em = emf.createEntityManager();
+        TypedQuery<Hobby> query = em.createQuery("SELECT h FROM Hobby h", Hobby.class);
+        List<Hobby> hobbies = query.getResultList();
+        List<HobbyDTO> hobbyDTOList = new ArrayList<>();
+        hobbies.forEach((Hobby hobby) -> hobbyDTOList.add(new HobbyDTO(hobby)));
+        return hobbyDTOList;
     }
 
     public List<CityInfoDTO> getAllZipCodes() {

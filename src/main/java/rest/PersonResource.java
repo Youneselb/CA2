@@ -50,6 +50,20 @@ public class PersonResource {
 
     }
     
+    @Path("/all")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getAll() {
+       return Response.ok().entity(GSON.toJson(PERSONFACADE.getAllPersons())).build();
+    }
+    
+    @Path("/hobby")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getHobbies(){
+        return Response.ok().entity(GSON.toJson(PERSONFACADE.getHobbies())).build();
+    }
+    
     @POST
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
