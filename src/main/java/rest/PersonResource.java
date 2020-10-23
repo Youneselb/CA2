@@ -82,6 +82,7 @@ public class PersonResource {
     
     @PUT
     @Path("edit/{id}")
+    @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
     public String editPerson(@PathParam("id") long id, String person) throws MissingInputException, PersonNotFoundException {
         PersonDTO pDTO = GSON.fromJson(person, PersonDTO.class);

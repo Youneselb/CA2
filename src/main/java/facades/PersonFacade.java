@@ -36,17 +36,14 @@ public class PersonFacade {
 
     public List<PersonDTO> getPersonsByHobby(String hobby) {
         EntityManager em = emf.createEntityManager();
-        Query query = em.createQuery("SELECT HOBBY.name, PERSON.FNAME, PERSON.LNAME\n" +
-"FROM startcode.HOBBY \n" +
-"inner join hobby_person on HOBBY.NAME = Hobby_ID\n" +
-"inner join PERSON on persons_ID = persons_ID");
+        Query query = em.createQuery("SELECT HOBBY.name, PERSON.FNAME, PERSON.LNAME FROM startcode.HOBBY inner join hobby_person on HOBBY.NAME = Hobby_ID inner join PERSON on persons_ID = persons_ID");
         query.setParameter("hobby", hobby);
         List<Person> personDetails = query.getResultList();
         List<PersonDTO> personDTOList = new ArrayList<>();
         personDetails.forEach((Person person) -> personDTOList.add(new PersonDTO(person)));
         return personDTOList;
     }
-    
+
     public List<HobbyDTO> getHobbies() {
         EntityManager em = emf.createEntityManager();
         TypedQuery<Hobby> query = em.createQuery("SELECT h FROM Hobby h", Hobby.class);
@@ -94,8 +91,6 @@ public class PersonFacade {
         personCity.forEach((Person person) -> personDTOList.add(new PersonDTO(person)));
         return personDTOList;
     }
-    
-            
 
     public PersonDTO editPerson(PersonDTO p) throws PersonNotFoundException, MissingInputException {
         if ((p.getfName().length() == 0) || (p.getlName().length() == 0)) {
