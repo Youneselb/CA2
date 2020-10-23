@@ -39,10 +39,10 @@ public class PersonFacade {
         Query query = em.createQuery("SELECT h.persons FROM Hobby h WHERE h.name = :hobby");
         query.setParameter("hobby", hobby);
         List<Person> persons = query.getResultList();
-        List<PersonDTO> personsDTOs = new ArrayList();                      
+        List<PersonDTO> personsDTOs = new ArrayList();
         persons.forEach((Person person) -> personsDTOs.add(new PersonDTO(person)));
         return personsDTOs;
-      
+
     }
     
     public List<HobbyDTO> getHobbies() {
@@ -56,7 +56,7 @@ public class PersonFacade {
 
     public List<CityInfoDTO> getAllZipCodes() {
         EntityManager em = emf.createEntityManager();
-        TypedQuery<CityInfo> query = em.createQuery("SELECT c FROM cityinfo c", CityInfo.class);
+        TypedQuery<CityInfo> query = em.createQuery("SELECT c FROM CityInfo c", CityInfo.class);
         List<CityInfo> cityinfos = query.getResultList();
         List<CityInfoDTO> zipcodes = new ArrayList();
         cityinfos.forEach((CityInfo cityinfo) -> {
@@ -106,12 +106,13 @@ public class PersonFacade {
 
     public List<PersonDTO> getPersonsByCity(String city) {
         EntityManager em = emf.createEntityManager();
-        Query query = em.createQuery("SELECT p FROM Person p JOIN a.address a WHERE a.street=:city");
+        Query query = em.createQuery("SELECT p.address FROM Person p JOIN CityInfo c WHERE c.addresses = :city");
         query.setParameter("city", city);
-        List<Person> personCity = query.getResultList();
-        List<PersonDTO> personDTOList = new ArrayList<>();
-        personCity.forEach((Person person) -> personDTOList.add(new PersonDTO(person)));
-        return personDTOList;
+        List<Person> persons = query.getResultList();
+        List<PersonDTO> personsDTOs = new ArrayList();
+        persons.forEach((Person person) -> personsDTOs.add(new PersonDTO(person)));
+        return personsDTOs;
+
     }
 
     public PersonDTO editPerson(PersonDTO p) throws PersonNotFoundException, MissingInputException {
@@ -172,7 +173,6 @@ public class PersonFacade {
         }
 //        EntityManagerFactory emf = EMF_Creator.createEntityManagerFactory();
 //        EntityManager em = emf.createEntityManager();
-        
 //        Person p1 = new Person("someemail", "inferno", "mirage");
 //        Phone ph1 = new Phone(25252525, "yes");
 //        Address a1 = new Address("groovestreet", "yes", em.find(CityInfo.class, "0800"));
