@@ -50,6 +50,23 @@ public class PersonResource {
 
     }
     
+    @Path("/{city}")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getPersonsByCity(@PathParam("city") String city) throws EntityNotFoundException{
+        List<PersonDTO> personList = PERSONFACADE.getPersonsByCity(city);
+
+        if(personList.isEmpty()){
+            throw new EntityNotFoundException("Hobby does not excist");
+        }
+
+        return Response.ok()
+                .entity(GSON.toJson(personList))
+                .build();
+
+    }
+
+    
     @Path("/all")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
