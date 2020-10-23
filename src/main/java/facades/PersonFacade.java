@@ -56,7 +56,7 @@ public class PersonFacade {
 
     public List<CityInfoDTO> getAllZipCodes() {
         EntityManager em = emf.createEntityManager();
-        TypedQuery<CityInfo> query = em.createQuery("SELECT c.zipCode FROM CityInfo c", CityInfo.class);
+        TypedQuery<CityInfo> query = em.createQuery("SELECT c FROM CityInfo c", CityInfo.class);
         List<CityInfo> cityinfos = query.getResultList();
         List<CityInfoDTO> zipcodes = new ArrayList();
         cityinfos.forEach((CityInfo cityinfo) -> {
@@ -85,7 +85,7 @@ public class PersonFacade {
 
     public List<PersonDTO> getPersonsByCity(String city) {
         EntityManager em = emf.createEntityManager();
-        Query query = em.createQuery("SELECT c.addresses FROM CityInfo c WHERE c.city = :city");
+        Query query = em.createQuery("SELECT c.addresses FROM CityInfo c JOIN Address a WHERE a.persons = :city");
         query.setParameter("city", city);
         List<Person> persons = query.getResultList();
         List<PersonDTO> personsDTOs = new ArrayList();
