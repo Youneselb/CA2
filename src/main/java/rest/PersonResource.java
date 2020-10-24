@@ -88,6 +88,7 @@ public class PersonResource {
         return Response.ok().entity(GSON.toJson(PERSONFACADE.getHobbies())).build();
     }
     
+<<<<<<< HEAD
 //    @POST
 //    @Produces({MediaType.APPLICATION_JSON})
 //    @Consumes({MediaType.APPLICATION_JSON})
@@ -96,6 +97,16 @@ public class PersonResource {
 //        PersonDTO pNew = PERSONFACADE.addPerson(p.getfName(), p.getlName(), p.getEmail(), p.getStreet(), p.getAdditionalinfo());
 //        return GSON.toJson(pNew);
 //    }
+=======
+    @POST
+    @Produces({MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_JSON})
+    public String updatePerson(String person) throws MissingInputException {
+        PersonDTO p = GSON.fromJson(person, PersonDTO.class);
+        PersonDTO pNew = PERSONFACADE.addPerson(p.getfName(), p.getlName(), p.getEmail());
+        return GSON.toJson(pNew);
+    }
+>>>>>>> a1bc4ef2e122263a49a0d9dfad8e7d9125aa9f9e
     
     @PUT
     @Path("edit/{id}")
