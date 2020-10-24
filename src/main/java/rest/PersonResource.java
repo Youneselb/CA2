@@ -2,7 +2,10 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import dto.CityInfoDTO;
+import dto.HobbyDTO;
 import dto.PersonDTO;
+import dto.PhoneDTO;
 import exceptions.MissingInputException;
 import exceptions.PersonNotFoundException;
 import facades.PersonFacade;
@@ -88,26 +91,19 @@ public class PersonResource {
         return Response.ok().entity(GSON.toJson(PERSONFACADE.getHobbies())).build();
     }
     
-<<<<<<< HEAD
-//    @POST
-//    @Produces({MediaType.APPLICATION_JSON})
-//    @Consumes({MediaType.APPLICATION_JSON})
-//    public String addPerson(String person) throws MissingInputException {
-//        PersonDTO p = GSON.fromJson(person, PersonDTO.class);
-//        PersonDTO pNew = PERSONFACADE.addPerson(p.getfName(), p.getlName(), p.getEmail(), p.getStreet(), p.getAdditionalinfo());
-//        return GSON.toJson(pNew);
-//    }
-=======
     @POST
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
-    public String updatePerson(String person) throws MissingInputException {
+    public String addPerson(String person, String phone, String cityInfo, String hobby) throws MissingInputException {
         PersonDTO p = GSON.fromJson(person, PersonDTO.class);
-        PersonDTO pNew = PERSONFACADE.addPerson(p.getfName(), p.getlName(), p.getEmail());
+        PhoneDTO ph = GSON.fromJson(phone, PhoneDTO.class);
+        CityInfoDTO ci = GSON.fromJson(cityInfo, CityInfoDTO.class);
+        HobbyDTO h = GSON.fromJson(hobby, HobbyDTO.class);
+        PersonDTO pNew = PERSONFACADE.addPerson(p.getfName(), p.getlName(), p.getEmail(), p.getStreet(), p.getAdditionalinfo(), 
+                ph.getNumber(), ph.getDescription(), ci.getZipCode(), h.getName());
         return GSON.toJson(pNew);
     }
->>>>>>> a1bc4ef2e122263a49a0d9dfad8e7d9125aa9f9e
-    
+        
     @PUT
     @Path("edit/{id}")
     @Produces({MediaType.APPLICATION_JSON})
