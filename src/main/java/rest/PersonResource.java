@@ -2,7 +2,10 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import dto.CityInfoDTO;
+import dto.HobbyDTO;
 import dto.PersonDTO;
+import dto.PhoneDTO;
 import exceptions.MissingInputException;
 import exceptions.PersonNotFoundException;
 import facades.PersonFacade;
@@ -88,15 +91,20 @@ public class PersonResource {
         return Response.ok().entity(GSON.toJson(PERSONFACADE.getHobbies())).build();
     }
     
+
 //    @POST
 //    @Produces({MediaType.APPLICATION_JSON})
 //    @Consumes({MediaType.APPLICATION_JSON})
-//    public String updatePerson(String person) throws MissingInputException {
+//    public String addPerson(String person, String phone, String cityInfo, String hobby) throws MissingInputException {
 //        PersonDTO p = GSON.fromJson(person, PersonDTO.class);
-//        PersonDTO pNew = PERSONFACADE.addPerson(p.getfName(), p.getlName(), p.getEmail());
+//        PhoneDTO ph = GSON.fromJson(phone, PhoneDTO.class);
+//        CityInfoDTO ci = GSON.fromJson(cityInfo, CityInfoDTO.class);
+//        HobbyDTO h = GSON.fromJson(hobby, HobbyDTO.class);
+//        PersonDTO pNew = PERSONFACADE.addPerson(p.getfName(), p.getlName(), p.getEmail(), p.getStreet(), p.getAdditionalinfo(), 
+//                ph.getNumber(), ph.getDescription(), ci.getZipCode(), h.getName());
 //        return GSON.toJson(pNew);
 //    }
-    
+        
     @PUT
     @Path("edit/{id}")
     @Produces({MediaType.APPLICATION_JSON})
