@@ -47,4 +47,4 @@ Henrik: Worked on index-html refactor, refactor and completion of all entity cla
 Mark:
 
 What did your team accomplish during this spring?
-We finished most of the backend, but had trouble testing post endpoints, because database keeps crashing. We did not do any frontend work. 
+We finished most of the backend, but had trouble testing POST and PUT endpoints, because database keeps crashing. We did not do any frontend work. 
