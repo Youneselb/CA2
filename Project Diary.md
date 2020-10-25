@@ -42,8 +42,8 @@ Who was active during this sprint?
 Everyone was active.
 
 Who did what, during this sprint?
-Yones: Looking at facade and endpoints (getAllpersons).
-Henrik:
+Yones: Looking at facade and endpoints (getAllpersons) and (gethobbies).
+Henrik: Worked on index-html refactor, refactor and completion of all entity classes, the facade methods getPersonsByHobby, getAllZipCodes, addPerson, editPerson, getPersonsByCity and the resource methods editPerson, addPerson, getAllZips, getPersonsByCity, getPersonsByHobby.
 Mark:
 
 What did your team accomplish during this spring?
