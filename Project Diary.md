@@ -39,7 +39,12 @@ The entities and done and somewhat ready for testing. The database is ready for 
 
 Phase three (Friday 23/10- Sunday 25/10):
 Who was active during this sprint?
+Everyone was active.
 
 Who did what, during this sprint?
+Yones: Looking at facade and endpoints (getAllpersons).
+Henrik:
+Mark:
 
 What did your team accomplish during this spring?
+We finished most of the backend, but had trouble testing post endpoints, because database keeps crashing. We did not do any frontend work. 
