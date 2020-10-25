@@ -44,7 +44,7 @@ Everyone was active.
 Who did what, during this sprint?
 Yones: Looking at facade and endpoints (getAllpersons) and (gethobbies).
 Henrik: Worked on index-html refactor, refactor and completion of all entity classes, the facade methods getPersonsByHobby, getAllZipCodes, addPerson, editPerson, getPersonsByCity and the resource methods editPerson, addPerson, getAllZips, getPersonsByCity, getPersonsByHobby.
-Mark:
+Mark: Worked on PersonFacadeTest, PersonResourcetest. Also looked at various classes and methods such as addPerson in the facade and resource.
 
 What did your team accomplish during this spring?
 We finished most of the backend, but had trouble testing POST and PUT endpoints, because database keeps crashing. We did not do any frontend work. 
